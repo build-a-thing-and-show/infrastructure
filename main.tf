@@ -10,7 +10,7 @@ resource "aws_instance" "tr_ec2" {
     key_name = "batash00"
     associate_public_ip_address = true
     ebs_block_device {
-      device_name = "tr_ec2_ssd"
+      device_name = "/dev/xvda"
       volume_size = 8
       volume_type = "gp3"
     }
