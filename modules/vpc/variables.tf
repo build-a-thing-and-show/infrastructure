@@ -5,7 +5,7 @@ variable "vpc_cidr_block" {
 
 variable "vpc_name" {
   type    = string
-  default = "eks-vpc"
+  default = "batas-vpc"
 }
 
 variable "subnet_private_cidr_block" {

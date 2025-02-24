@@ -1,5 +1,5 @@
 output "vpc_id" {
-  value = aws_vpc.main.id
+  value = aws_vpc.batas_vpc.id
 }
 
 output "subnet_private_id" {
