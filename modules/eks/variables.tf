@@ -19,3 +19,7 @@ variable "eks_subnet_ids" {
 variable "eks_cluster_policy_arn" {
   type = string
 }
+
+variable "eks_iam_role_name"{
+  type = string
+}
