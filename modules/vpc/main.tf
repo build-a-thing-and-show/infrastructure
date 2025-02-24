@@ -18,7 +18,7 @@ resource "aws_subnet" "private" {
 }
 
 resource "aws_subnet" "public" {
-  vpc_id            = aws_vpc.main.id
+  vpc_id            = aws_vpc.batas_vpc.id
   cidr_block        = var.subnet_public_cidr_block
   availability_zone = var.subnet_public_availability_zone
   map_public_ip_on_launch = true
