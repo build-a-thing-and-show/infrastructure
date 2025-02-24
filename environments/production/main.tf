@@ -1,13 +1,13 @@
 module "vpc" {
-  source = "../modules/vpc"
+  source = "../../modules/vpc"
 }
 
 module "iam" {
-  source = "../modules/iam"
+  source = "../../modules/iam"
 }
 
 module "eks" {
-  source             = "../modules/eks"
+  source             = "../../modules/eks"
   eks_iam_role_arn   = module.iam.iam_role_arn
   eks_subnet_ids = [
     module.vpc.subnet_private_id,
