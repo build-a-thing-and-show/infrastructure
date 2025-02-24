@@ -7,7 +7,7 @@ resource "aws_vpc" "batas_vpc" {
 }
 
 resource "aws_subnet" "private" {
-  vpc_id            = aws_vpc.main.id
+  vpc_id            = aws_vpc.batas_vpc.id
   cidr_block        = var.subnet_private_cidr_block
   availability_zone = var.subnet_private_availability_zone
 
