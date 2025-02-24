@@ -19,3 +19,8 @@ resource "aws_eks_cluster" "batas_cluster" {
     aws_iam_role_policy_attachment.cluster_AmazonEKSClusterPolicy,
   ]
 }
+
+resource "aws_iam_role_policy_attachment" "cluster_AmazonEKSClusterPolicy" {
+  policy_arn = var.eks_cluster_policy_arn
+  role       = var.eks_iam_role_arn
+}

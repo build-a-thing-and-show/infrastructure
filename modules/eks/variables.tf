@@ -15,3 +15,7 @@ variable "eks_version" {
 variable "eks_subnet_ids" {
   type = list(string)
 }
+
+variable "eks_cluster_policy_arn" {
+  type = string
+}
