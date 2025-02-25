@@ -24,3 +24,22 @@ resource "aws_iam_role_policy_attachment" "cluster_AmazonEKSClusterPolicy" {
   policy_arn = var.eks_cluster_policy_arn
   role       = var.eks_iam_role_name
 }
+
+resource "aws_eks_node_group" "node_group" {
+  cluster_name = aws_eks_cluster.batas_cluster.name
+  node_group_name = "single-t2-micro-node"
+  node_role_arn = var.eks_node_group_iam_role_arn
+  scaling_config {
+    desired_size = 1
+    max_size = 1
+    min_size = 1
+  }
+  instance_types = ["t2.micro"]
+  subnet_ids = var.eks_subnet_ids
+  # we want to make sure the node_group gets created after:
+  #  - the cluster is created
+  # is this really needed?
+  depends_on = [ 
+    aws_eks_cluster.batas_cluster,
+   ]
+}
