@@ -16,3 +16,18 @@ resource "aws_iam_role" "eks_cluster" {
     ]
   })
 }
+
+resource "aws_iam_role" "eks_node_group" {
+  name = "eks-single-t2-micro-node-role"
+
+  assume_role_policy = jsonencode({
+    Statement = [{
+      Action = "sts:AssumeRole"
+      Effect = "Allow"
+      Principal = {
+        Service = "ec2.amazonaws.com"
+      }
+    }]
+    Version = "2012-10-17"
+  })
+}
