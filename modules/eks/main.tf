@@ -1,4 +1,4 @@
-resource "aws_eks_cluster" "batas_cluster" {
+resource "aws_eks_cluster" "main" {
   name = var.eks_cluster_name
 
   access_config {
@@ -25,8 +25,8 @@ resource "aws_iam_role_policy_attachment" "cluster_AmazonEKSClusterPolicy" {
   role       = var.eks_iam_role_name
 }
 
-resource "aws_eks_node_group" "node_group" {
-  cluster_name = aws_eks_cluster.batas_cluster.name
+resource "aws_eks_node_group" "main" {
+  cluster_name = aws_eks_cluster.main.name
   node_group_name = "single-t2-micro-node"
   node_role_arn = var.eks_node_group_iam_role_arn
   scaling_config {
@@ -40,6 +40,6 @@ resource "aws_eks_node_group" "node_group" {
   #  - the cluster is created
   # is this really needed?
   depends_on = [ 
-    aws_eks_cluster.batas_cluster,
+    aws_eks_cluster.main,
    ]
 }
