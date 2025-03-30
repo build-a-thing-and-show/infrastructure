@@ -15,6 +15,10 @@ variable "eks_node_group_iam_role_arn" {
   type = string
 }
 
+variable "eks_node_group_iam_role_name" {
+  type = string
+}
+
 variable "eks_version" {
   type    = string
   default = "1.31"
