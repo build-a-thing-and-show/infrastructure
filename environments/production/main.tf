@@ -14,7 +14,7 @@ module "eks" {
   eks_node_group_iam_role_name = module.iam.eks_node_group_iam_role_name
   eks_cluster_policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
   eks_subnet_ids = [
-    //module.vpc.subnet_private_id,  --> for experimental reason, only use public subnet at this moment. We will change this once we add the API Gateway, ALB and NAT Gateway to the arch.
+    module.vpc.subnet_private_id,
     module.vpc.subnet_public_id,
   ]
 }

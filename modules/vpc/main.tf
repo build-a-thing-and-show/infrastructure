@@ -6,11 +6,25 @@ resource "aws_vpc" "batas_vpc" {
   }
 }
 
+/*
 resource "aws_subnet" "private" {
   vpc_id            = aws_vpc.batas_vpc.id
   cidr_block        = var.subnet_private_cidr_block
   availability_zone = var.subnet_private_availability_zone
 
+  tags = {
+    Name = var.subnet_private_name
+    "kubernetes.io/role/internal-elb" = "1"
+    "kubernetes.io/cluster/eks_cluster" = "shared" // Instead of hardcoding the cluster name, we should use ${var.cluster_name}
+  }
+}
+*/
+//--> for experimental reason, only use public subnet at this moment. We will change this once we add the API Gateway, ALB and NAT Gateway 
+resource "aws_subnet" "public-1" {
+  vpc_id            = aws_vpc.batas_vpc.id
+  cidr_block        = var.subnet_private_cidr_block
+  availability_zone = var.subnet_private_availability_zone
+  map_public_ip_on_launch = true  // temporariliy convert this subnet to public (without changing the names)
   tags = {
     Name = var.subnet_private_name
     "kubernetes.io/role/internal-elb" = "1"
