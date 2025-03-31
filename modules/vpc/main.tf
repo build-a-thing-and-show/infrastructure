@@ -20,7 +20,7 @@ resource "aws_subnet" "private" {
 }
 */
 //--> for experimental reason, only use public subnet at this moment. We will change this once we add the API Gateway, ALB and NAT Gateway 
-resource "aws_subnet" "public-1" {
+resource "aws_subnet" "private" {
   vpc_id            = aws_vpc.batas_vpc.id
   cidr_block        = var.subnet_private_cidr_block
   availability_zone = var.subnet_private_availability_zone
