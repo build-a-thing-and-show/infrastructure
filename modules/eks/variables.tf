@@ -1,6 +1,6 @@
 variable "eks_cluster_name" {
   type    = string
-  default = "batas_eks_cluster"
+  default = "eks_cluster"
 }
 
 variable "eks_iam_role_arn" {
@@ -12,6 +12,10 @@ variable "eks_iam_role_name"{
 }
 
 variable "eks_node_group_iam_role_arn" {
+  type = string
+}
+
+variable "eks_node_group_iam_role_name" {
   type = string
 }
 
