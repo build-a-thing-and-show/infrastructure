@@ -93,6 +93,28 @@ jobs:
         if: steps.plan.outcome == 'failure'
         run: exit 1
 
-#      - name: Terraform Apply
-#        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-#        run: terraform apply -auto-approve -input=false
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: terraform apply -auto-approve -input=false
+
+      # -----------------------
+      # Helm Deploy Section 👇
+      # -----------------------
+
+      - name: Update kubeconfig for EKS
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: aws eks update-kubeconfig --region ${{ secrets.AWS_REGION }} --name eks_cluster
+
+      - name: Install Helm
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        uses: azure/setup-helm@v3
+        with:
+          version: 'v3.13.0'
+
+      - name: Deploy core-ui with Helm
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          helm upgrade --install core-ui deployments/helm/core-ui \
+            --namespace default \
+            --set image.repository=${{ secrets.CORE_UI_ECR_REPO }} \
+            --set image.tag=latest
