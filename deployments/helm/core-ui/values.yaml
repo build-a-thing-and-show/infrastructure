@@ -1,0 +1,12 @@
+replicaCount: 1
+
+image:
+  repository: <your-ecr-url>/core-ui
+  tag: latest
+  pullPolicy: Always
+
+service:
+  type: LoadBalancer  #Provisions an AWS ELB or NLB, assigns a public IP, and routes traffic to the pods
+  port: 80
+
+containerPort: 3000 #NOTE: This should match with the port exposed in Dockerfile from core-ui
